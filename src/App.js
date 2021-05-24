@@ -1,25 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+import { useTodos } from './hooks/todos.hook' 
+import Todo from './components/todo'
+import GlobalStyles from './styles/global'
+import { Main } from './App.styled'
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const { todos } = useTodos()
+
+    return (
+        <Main>
+            <GlobalStyles/>
+            { todos ? todos.map(todo => (
+                <Todo key={ todo.id } title={ todo.title } />
+            )) : <Todo title={ 'Without Todos' } /> }
+        </Main>
+    );
 }
 
-export default App;
+export default App
